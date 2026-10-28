@@ -1,0 +1,10 @@
+[build]
+  command = "npm run build"
+  publish = "dist"
+
+# 새로고침하거나 /posts/abc 같은 주소로 바로 들어와도 404가 나지 않도록
+# 모든 경로를 index.html로 보내 React Router가 처리하게 합니다.
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200

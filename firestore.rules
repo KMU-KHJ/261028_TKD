@@ -1,0 +1,64 @@
+rules_version = '2';
+
+// ─────────────────────────────────────────────────────────────
+// 태권도 연구실 아카이브 - Firestore 보안 규칙
+//
+// ★ 관리자 이메일 바꾸는 방법 ★
+//   아래 isAdmin() 안의 'professor@example.com' 을
+//   교수님의 Google 이메일로 바꿔 주세요. (작은따옴표는 그대로 두기)
+//   관리자가 여러 명이면: ['a@gmail.com', 'b@gmail.com']
+//   Netlify 환경변수 VITE_ADMIN_EMAILS 에도 같은 이메일을 넣어야 합니다.
+//
+// 붙여넣는 곳: Firebase 콘솔 → Firestore Database → 규칙(Rules) 탭
+//            → 기존 내용을 모두 지우고 이 파일 전체를 붙여넣기 → [게시]
+// ─────────────────────────────────────────────────────────────
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    function isSignedIn() {
+      return request.auth != null;
+    }
+
+    function isAdmin() {
+      return isSignedIn()
+        && request.auth.token.email_verified == true
+        && request.auth.token.email in ['professor@example.com'];
+    }
+
+    // 글 형식이 올바른지 확인 (잘못된 데이터 저장 방지)
+    function isValidPost(data) {
+      return data.title is string && data.title.size() > 0 && data.title.size() <= 200
+        && data.category in ['research', 'course']
+        && data.content is string && data.content.size() <= 200000
+        && data.tags is list
+        && data.links is list;
+    }
+
+    // 자료(글): 누구나 읽기, 관리자만 작성·수정·삭제
+    match /posts/{postId} {
+      allow read: if true;
+      allow create, update: if isAdmin() && isValidPost(request.resource.data);
+      allow delete: if isAdmin();
+
+      // 댓글(토론): 로그인 사용자만 읽기·작성, 수정 불가, 삭제는 본인 또는 관리자
+      match /comments/{commentId} {
+        allow read: if isSignedIn();
+        allow create: if isSignedIn()
+          && request.resource.data.authorUid == request.auth.uid
+          && request.resource.data.text is string
+          && request.resource.data.text.size() >= 1
+          && request.resource.data.text.size() <= 2000;
+        allow update: if false;
+        allow delete: if isSignedIn()
+          && (resource.data.authorUid == request.auth.uid || isAdmin());
+      }
+    }
+
+    // 회원 정보: 본인 문서만 읽기·쓰기, 관리자는 읽기 가능
+    match /users/{uid} {
+      allow read: if isSignedIn() && (request.auth.uid == uid || isAdmin());
+      allow write: if isSignedIn() && request.auth.uid == uid;
+    }
+  }
+}

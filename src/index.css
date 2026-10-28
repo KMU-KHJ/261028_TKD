@@ -1,0 +1,91 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply bg-white text-slate-800 antialiased;
+    font-family: 'Pretendard', 'Apple SD Gothic Neo', 'Malgun Gothic', system-ui, sans-serif;
+  }
+  :focus-visible {
+    @apply outline-none ring-2 ring-navy-600 ring-offset-2;
+  }
+}
+
+@layer components {
+  .btn {
+    @apply inline-flex items-center justify-center gap-2 rounded-md px-4 py-2 text-sm font-medium transition-colors disabled:cursor-not-allowed disabled:opacity-50;
+  }
+  .btn-primary {
+    @apply btn bg-navy-800 text-white hover:bg-navy-700;
+  }
+  .btn-secondary {
+    @apply btn border border-slate-300 bg-white text-slate-700 hover:bg-slate-50;
+  }
+  .btn-danger {
+    @apply btn border border-red-300 bg-white text-red-700 hover:bg-red-50;
+  }
+  .input {
+    @apply w-full rounded-md border border-slate-300 px-3 py-2 text-sm focus:border-navy-600 focus:outline-none focus:ring-1 focus:ring-navy-600;
+  }
+  .label {
+    @apply mb-1 block text-sm font-medium text-slate-700;
+  }
+
+  /* 마크다운 본문 스타일 (별도 라이브러리 없이 최소한만) */
+  .markdown {
+    @apply leading-relaxed text-slate-800;
+  }
+  .markdown > * + * {
+    @apply mt-4;
+  }
+  .markdown h1 {
+    @apply mt-8 text-2xl font-bold text-navy-900;
+  }
+  .markdown h2 {
+    @apply mt-8 border-b border-slate-200 pb-1 text-xl font-bold text-navy-900;
+  }
+  .markdown h3 {
+    @apply mt-6 text-lg font-semibold text-navy-900;
+  }
+  .markdown a {
+    @apply text-navy-600 underline underline-offset-2 hover:text-navy-800;
+  }
+  .markdown ul {
+    @apply list-disc pl-6;
+  }
+  .markdown ol {
+    @apply list-decimal pl-6;
+  }
+  .markdown li + li {
+    @apply mt-1;
+  }
+  .markdown blockquote {
+    @apply border-l-4 border-navy-100 bg-navy-50 px-4 py-2 text-slate-700;
+  }
+  .markdown code {
+    @apply rounded bg-slate-100 px-1 py-0.5 text-sm;
+  }
+  .markdown pre {
+    @apply overflow-x-auto rounded-md bg-slate-900 p-4 text-sm text-slate-100;
+  }
+  .markdown pre code {
+    @apply bg-transparent p-0;
+  }
+  .markdown table {
+    @apply block w-full overflow-x-auto border-collapse text-sm;
+  }
+  .markdown th,
+  .markdown td {
+    @apply border border-slate-300 px-3 py-2 text-left;
+  }
+  .markdown th {
+    @apply bg-slate-50 font-semibold;
+  }
+  .markdown img {
+    @apply max-w-full;
+  }
+  .markdown hr {
+    @apply border-slate-200;
+  }
+}
