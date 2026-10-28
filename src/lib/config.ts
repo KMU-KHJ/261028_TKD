@@ -1,14 +1,13 @@
-const env = import.meta.env;
+import { SITE_SETTINGS } from './siteSettings';
 
-export const SITE_NAME = env.VITE_SITE_NAME?.trim() || '태권도 연구실 아카이브';
+export const SITE_NAME = SITE_SETTINGS.siteName;
 
-export const ADMIN_EMAILS: string[] = (env.VITE_ADMIN_EMAILS ?? '')
-  .split(',')
+export const ADMIN_EMAILS: string[] = SITE_SETTINGS.adminEmails
   .map((email) => email.trim().toLowerCase())
   .filter(Boolean);
 
 /** API 키가 있을 때만 Firebase를 사용하고, 없으면 테스트(mock) 모드로 동작 */
-export const isFirebaseConfigured = Boolean(env.VITE_FIREBASE_API_KEY?.trim());
+export const isFirebaseConfigured = Boolean(SITE_SETTINGS.firebase.apiKey.trim());
 
 export function isAdminEmail(email: string | null | undefined): boolean {
   if (!email) return false;

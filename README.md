@@ -7,8 +7,8 @@
 - 로그인하지 않은 방문자: 글 읽기만 가능
 
 > **두 가지 모드로 동작합니다**
-> - **테스트 모드**: Firebase 설정값이 없을 때. 데이터가 *지금 사용하는 브라우저에만* 저장됩니다. 화면 맨 위에 노란 안내 띠가 보입니다.
-> - **실제 모드**: Firebase 설정값(환경변수)을 넣으면 Google 로그인과 온라인 데이터베이스(Firestore)를 사용합니다.
+> - **실제 모드**(현재 설정): `src/lib/siteSettings.ts`의 Firebase 설정값으로 Google 로그인과 온라인 데이터베이스(Firestore)를 사용합니다.
+> - **테스트 모드**: 위 파일의 `apiKey`를 비우면 데이터가 *지금 사용하는 브라우저에만* 저장됩니다. 화면 맨 위에 노란 안내 띠가 보입니다.
 
 파일 첨부는 무료 요금제 유지를 위해 **외부 링크(Google Drive, YouTube, DOI 등)** 로만 받습니다.
 
@@ -30,10 +30,7 @@
    npm run dev
    ```
 4. 화면에 나온 주소(보통 `http://localhost:5173`)를 브라우저로 엽니다.
-5. **테스트 모드**로 열립니다. 오른쪽 위 **로그인** → **테스트 로그인(관리자)** 를 누르면 글쓰기를 해 볼 수 있습니다.
-   **테스트 로그인(학생)** 으로 바꾸면 댓글을 달아 볼 수 있습니다.
-
-> 테스트 모드의 데이터를 처음 상태로 되돌리려면 브라우저의 "사이트 데이터 삭제"를 하면 됩니다.
+5. 실제 Firebase에 연결된 상태로 열립니다. (내 컴퓨터 주소 `localhost`는 Firebase 승인된 도메인에 기본으로 들어 있습니다)
 
 ---
 
@@ -52,8 +49,6 @@
    git push -u origin main
    ```
 
-> `.env` 파일(비밀 설정값)은 `.gitignore`에 들어 있어 GitHub에 **올라가지 않습니다.** 정상입니다.
-
 ---
 
 ## 3. Netlify로 배포하기 (무료)
@@ -64,7 +59,7 @@
 4. 빌드 설정은 `netlify.toml` 파일에 이미 들어 있으므로 그대로 두고 **Deploy** 클릭
    - Build command: `npm run build`
    - Publish directory: `dist`
-5. 1~2분 뒤 `https://무작위이름.netlify.app` 주소가 생깁니다. 이때는 **테스트 모드**로 보입니다.
+5. 1~2분 뒤 `https://무작위이름.netlify.app` 주소가 생깁니다.
 6. (선택) **Site configuration → Change site name** 에서 주소 앞부분을 바꿀 수 있습니다.
 
 이후 GitHub에 변경 사항을 올리면 Netlify가 **자동으로 다시 배포**합니다.
@@ -84,25 +79,13 @@ Firebase는 **Spark(무료) 요금제**를 그대로 사용합니다. 결제 정
 5. **데이터베이스 만들기**: **빌드 → Firestore Database** → **데이터베이스 만들기** → 위치 `asia-northeast3 (서울)` → **프로덕션 모드**로 시작
 6. **보안 규칙 붙여넣기**: Firestore → **규칙** 탭 → 기존 내용을 모두 지우고 이 저장소의 `firestore.rules` 내용을 붙여넣기
    → 그 안의 `professor@example.com` 을 **교수님 Google 이메일**로 바꾸기 → **게시**
-7. **Netlify에 환경변수 등록**: Netlify 사이트 → **Site configuration → Environment variables → Add a variable**
-   `.env.example` 파일에 있는 이름 그대로 아래 값을 하나씩 등록합니다.
+7. **설정 파일 확인**: `src/lib/siteSettings.ts` 파일에 Firebase 설정값(`firebaseConfig`)과 관리자 이메일이 들어 있습니다.
+   다른 Firebase 프로젝트로 바꾸거나 관리자를 추가할 때는 이 파일만 고치면 됩니다. (Netlify 환경변수는 필요 없습니다)
+   - Firebase 웹 설정값은 브라우저에 공개되는 값이라 코드에 넣어도 안전합니다. 데이터 보호는 보안 규칙이 담당합니다.
+8. **배포**: 바뀐 코드를 GitHub에 올리면 Netlify가 자동으로 다시 배포합니다.
+9. **확인**: 교수님 계정으로 Google 로그인 → 이름 옆에 "(관리자)"가 보이면 상단 **글쓰기** 메뉴로 첫 글 작성
 
-   | 이름 | 넣을 값 |
-   | --- | --- |
-   | `VITE_FIREBASE_API_KEY` | firebaseConfig의 `apiKey` |
-   | `VITE_FIREBASE_AUTH_DOMAIN` | `authDomain` |
-   | `VITE_FIREBASE_PROJECT_ID` | `projectId` |
-   | `VITE_FIREBASE_STORAGE_BUCKET` | `storageBucket` |
-   | `VITE_FIREBASE_MESSAGING_SENDER_ID` | `messagingSenderId` |
-   | `VITE_FIREBASE_APP_ID` | `appId` |
-   | `VITE_ADMIN_EMAILS` | 교수님 Google 이메일 (여러 명이면 쉼표로 구분) |
-   | `VITE_SITE_NAME` | (선택) 사이트 이름 |
-
-8. **재배포**: Netlify → **Deploys** → **Trigger deploy → Deploy site**
-   (환경변수는 다시 배포해야 반영됩니다.)
-9. **확인**: 사이트에서 노란 "테스트 모드" 띠가 사라졌는지 확인 → 교수님 계정으로 Google 로그인 → 상단 **글쓰기** 메뉴로 첫 글 작성
-
-> 내 컴퓨터에서도 실제 모드로 실행하려면 `.env.example`을 복사해 `.env` 파일을 만들고 같은 값을 넣은 뒤 `npm run dev` 를 다시 실행하세요.
+> `siteSettings.ts`에서 `apiKey`를 빈 값(`''`)으로 바꾸면 Firebase 없이 **테스트 모드**로 동작합니다.
 
 ### 무료 한도를 아끼는 방식
 - 실시간 구독(onSnapshot)을 쓰지 않고, 필요할 때만 읽습니다.
@@ -122,7 +105,7 @@ src/
     mock/       테스트 모드: 브라우저(localStorage)에 저장
     firebase/   실제 모드: Firebase에 저장
     index.ts    설정값 유무에 따라 둘 중 하나를 자동 선택
-  lib/          설정값, Firebase 초기화
+  lib/          설정값(siteSettings.ts), Firebase 초기화
   types/        데이터 형태 정의
   utils/        날짜·링크 등 도우미 함수
 firestore.rules Firebase 보안 규칙 (콘솔에 붙여넣는 파일)
