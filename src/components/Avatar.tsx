@@ -20,7 +20,7 @@ export default function Avatar({ name, photoURL, size = 'md' }: Props) {
   return (
     <span
       aria-hidden="true"
-      className={`${sizeClass} inline-flex shrink-0 items-center justify-center rounded-full bg-navy-100 font-semibold text-navy-800`}
+      className={`${sizeClass} inline-flex shrink-0 items-center justify-center rounded-full bg-belt-100 font-semibold text-belt-800`}
     >
       {name.slice(0, 1)}
     </span>

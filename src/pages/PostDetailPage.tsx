@@ -66,13 +66,13 @@ export default function PostDetailPage() {
 
   return (
     <article>
-      <Link to="/posts" className="text-sm text-navy-600 hover:underline">
+      <Link to="/posts" className="text-sm text-chung-600 hover:underline">
         ← 목록으로
       </Link>
 
       <header className="mt-4 border-b border-slate-200 pb-6">
         <CategoryBadge category={post.category} />
-        <h1 className="mt-2 text-2xl font-bold leading-snug text-navy-900 sm:text-3xl">{post.title}</h1>
+        <h1 className="mt-2 text-2xl font-bold leading-snug text-belt-900 sm:text-3xl">{post.title}</h1>
         <p className="mt-2 text-sm text-slate-500">
           {post.authorName && <span>{post.authorName} · </span>}
           <time dateTime={post.createdAt.toISOString()}>{formatDate(post.createdAt)}</time>

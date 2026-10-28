@@ -136,11 +136,11 @@ export default function PostEditorPage() {
   }
 
   const tabClass = (active: boolean) =>
-    `px-4 py-2 text-sm font-medium border-b-2 ${active ? 'border-navy-800 text-navy-900' : 'border-transparent text-slate-500 hover:text-slate-700'}`;
+    `px-4 py-2 text-sm font-medium border-b-2 ${active ? 'border-belt-800 text-belt-900' : 'border-transparent text-slate-500 hover:text-slate-700'}`;
 
   return (
     <div>
-      <h1 className="text-2xl font-bold text-navy-900">{isEdit ? '글 수정' : '새 글 작성'}</h1>
+      <h1 className="text-2xl font-bold text-belt-900">{isEdit ? '글 수정' : '새 글 작성'}</h1>
 
       <form onSubmit={handleSubmit} className="mt-6 space-y-6" noValidate>
         <div>

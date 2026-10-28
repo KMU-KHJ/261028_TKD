@@ -76,7 +76,7 @@ export default function PostListPage() {
 
   return (
     <div>
-      <h1 className="text-2xl font-bold text-navy-900">자료 목록</h1>
+      <h1 className="text-2xl font-bold text-belt-900">자료 목록</h1>
 
       <div className="mt-6 flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
         <fieldset>
@@ -85,8 +85,8 @@ export default function PostListPage() {
             {FILTERS.map((item) => (
               <label
                 key={item.value}
-                className={`cursor-pointer rounded px-4 py-1.5 text-sm font-medium focus-within:ring-2 focus-within:ring-navy-600 ${
-                  filter === item.value ? 'bg-navy-800 text-white' : 'text-slate-700 hover:bg-slate-100'
+                className={`cursor-pointer rounded px-4 py-1.5 text-sm font-medium focus-within:ring-2 focus-within:ring-belt-600 ${
+                  filter === item.value ? 'bg-belt-800 text-white' : 'text-slate-700 hover:bg-slate-100'
                 }`}
               >
                 <input

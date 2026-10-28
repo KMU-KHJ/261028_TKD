@@ -8,7 +8,7 @@
     font-family: 'Pretendard', 'Apple SD Gothic Neo', 'Malgun Gothic', system-ui, sans-serif;
   }
   :focus-visible {
-    @apply outline-none ring-2 ring-navy-600 ring-offset-2;
+    @apply outline-none ring-2 ring-chung-600 ring-offset-2;
   }
 }
 
@@ -17,7 +17,7 @@
     @apply inline-flex items-center justify-center gap-2 rounded-md px-4 py-2 text-sm font-medium transition-colors disabled:cursor-not-allowed disabled:opacity-50;
   }
   .btn-primary {
-    @apply btn bg-navy-800 text-white hover:bg-navy-700;
+    @apply btn bg-belt-800 text-white hover:bg-belt-700;
   }
   .btn-secondary {
     @apply btn border border-slate-300 bg-white text-slate-700 hover:bg-slate-50;
@@ -26,7 +26,7 @@
     @apply btn border border-red-300 bg-white text-red-700 hover:bg-red-50;
   }
   .input {
-    @apply w-full rounded-md border border-slate-300 px-3 py-2 text-sm focus:border-navy-600 focus:outline-none focus:ring-1 focus:ring-navy-600;
+    @apply w-full rounded-md border border-slate-300 px-3 py-2 text-sm focus:border-belt-600 focus:outline-none focus:ring-1 focus:ring-belt-600;
   }
   .label {
     @apply mb-1 block text-sm font-medium text-slate-700;
@@ -40,16 +40,16 @@
     @apply mt-4;
   }
   .markdown h1 {
-    @apply mt-8 text-2xl font-bold text-navy-900;
+    @apply mt-8 text-2xl font-bold text-belt-900;
   }
   .markdown h2 {
-    @apply mt-8 border-b border-slate-200 pb-1 text-xl font-bold text-navy-900;
+    @apply mt-8 border-l-4 border-hong-600 pl-3 text-xl font-bold text-belt-900;
   }
   .markdown h3 {
-    @apply mt-6 text-lg font-semibold text-navy-900;
+    @apply mt-6 text-lg font-semibold text-belt-900;
   }
   .markdown a {
-    @apply text-navy-600 underline underline-offset-2 hover:text-navy-800;
+    @apply text-chung-600 underline underline-offset-2 hover:text-chung-700;
   }
   .markdown ul {
     @apply list-disc pl-6;
@@ -61,7 +61,7 @@
     @apply mt-1;
   }
   .markdown blockquote {
-    @apply border-l-4 border-navy-100 bg-navy-50 px-4 py-2 text-slate-700;
+    @apply border-l-4 border-chung-600 bg-chung-50 px-4 py-2 text-slate-700;
   }
   .markdown code {
     @apply rounded bg-slate-100 px-1 py-0.5 text-sm;

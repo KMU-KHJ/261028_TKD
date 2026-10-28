@@ -32,7 +32,7 @@ export default function LoginPage() {
 
   return (
     <div className="mx-auto max-w-md rounded-xl border border-slate-200 p-8 text-center">
-      <h1 className="text-2xl font-bold text-navy-900">로그인</h1>
+      <h1 className="text-2xl font-bold text-belt-900">로그인</h1>
       <p className="mt-2 text-sm text-slate-600">로그인하면 자료에 댓글을 남기며 토론에 참여할 수 있습니다.</p>
 
       <div className="mt-8 flex flex-col gap-3">

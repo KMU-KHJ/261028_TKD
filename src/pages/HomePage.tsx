@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import BlackBeltBand from '../components/BlackBeltBand';
 import EmptyState from '../components/EmptyState';
 import ErrorState from '../components/ErrorState';
 import LoadingState from '../components/LoadingState';
@@ -33,20 +34,28 @@ export default function HomePage() {
 
   return (
     <div>
-      <section className="rounded-xl bg-navy-50 px-6 py-10 sm:px-10">
-        <h1 className="text-2xl font-bold text-navy-900 sm:text-3xl">{SITE_NAME}</h1>
-        <p className="mt-3 max-w-2xl leading-relaxed text-slate-700">
-          태권도학과 연구실의 연구자료와 수업자료를 한곳에 모아 둔 공간입니다.
-          <br className="hidden sm:inline" />
-          자료를 읽고 댓글로 함께 토론하며 생각을 넓혀 보세요.
-        </p>
-        <Link to="/posts" className="btn-primary mt-6">
-          전체 자료 보기
-        </Link>
+      {/* 흰 도복 위에 검은 띠를 두른 모양 */}
+      <section className="overflow-hidden rounded-xl border border-belt-100 bg-belt-50 shadow-sm">
+        <div className="px-6 pb-10 pt-10 sm:px-10">
+          <p className="text-sm font-semibold tracking-widest text-hong-600">TAEKWONDO LAB ARCHIVE</p>
+          <h1 className="mt-2 text-2xl font-bold text-belt-900 sm:text-3xl">{SITE_NAME}</h1>
+          <p className="mt-3 max-w-2xl leading-relaxed text-slate-700">
+            태권도학과 연구실의 연구자료와 수업자료를 한곳에 모아 둔 공간입니다.
+            <br className="hidden sm:inline" />{" "}
+            자료를 읽고 댓글로 함께 토론하며 생각을 넓혀 보세요.
+          </p>
+          <div className="mt-6 flex flex-wrap gap-2">
+            <Link to="/posts" className="btn-primary">
+              전체 자료 보기
+            </Link>
+          </div>
+        </div>
+        <BlackBeltBand />
+        <div className="h-10" />
       </section>
 
       <section aria-labelledby="latest-heading" className="mt-10">
-        <h2 id="latest-heading" className="text-xl font-bold text-navy-900">
+        <h2 id="latest-heading" className="text-xl font-bold text-belt-900">
           최신 자료
         </h2>
         <div className="mt-4">

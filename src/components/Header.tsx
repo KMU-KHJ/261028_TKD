@@ -4,9 +4,10 @@ import { SITE_NAME } from '../lib/config';
 import { authService } from '../services';
 import { useAuth } from './AuthProvider';
 import Avatar from './Avatar';
+import BeltKnot from './BeltKnot';
 
 const navClass = ({ isActive }: { isActive: boolean }) =>
-  `rounded-md px-3 py-2 text-sm font-medium ${isActive ? 'bg-navy-700 text-white' : 'text-navy-100 hover:bg-navy-700 hover:text-white'}`;
+  `rounded-md px-3 py-2 text-sm font-medium ${isActive ? 'bg-belt-700 text-white' : 'text-belt-100 hover:bg-belt-700 hover:text-white'}`;
 
 export default function Header() {
   const { user, loading } = useAuth();
@@ -24,9 +25,12 @@ export default function Header() {
   }
 
   return (
-    <header className="bg-navy-900 text-white">
+    <header className="bg-belt-900 text-white">
       <div className="mx-auto flex max-w-5xl flex-wrap items-center justify-between gap-3 px-4 py-3">
-        <Link to="/" className="text-lg font-bold tracking-tight">
+        <Link to="/" className="flex items-center gap-2 text-lg font-bold tracking-tight">
+          <span className="inline-flex h-9 w-9 items-center justify-center rounded-full bg-white">
+            <BeltKnot className="h-7 w-7" />
+          </span>
           {SITE_NAME}
         </Link>
         <nav aria-label="주 메뉴" className="flex flex-wrap items-center gap-1">
@@ -45,7 +49,7 @@ export default function Header() {
             (user ? (
               <div className="ml-2 flex items-center gap-2">
                 <Avatar name={user.displayName} photoURL={user.photoURL} size="sm" />
-                <span className="hidden text-sm text-navy-100 sm:inline">
+                <span className="hidden text-sm text-belt-100 sm:inline">
                   {user.displayName}
                   {user.isAdmin && ' (관리자)'}
                 </span>
@@ -53,7 +57,7 @@ export default function Header() {
                   type="button"
                   onClick={handleSignOut}
                   disabled={signingOut}
-                  className="rounded-md border border-navy-600 px-3 py-1.5 text-sm text-navy-100 hover:bg-navy-700"
+                  className="rounded-md border border-belt-600 px-3 py-1.5 text-sm text-belt-100 hover:bg-belt-700"
                 >
                   로그아웃
                 </button>

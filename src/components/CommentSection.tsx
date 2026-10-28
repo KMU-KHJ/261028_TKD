@@ -63,14 +63,14 @@ export default function CommentSection({ postId }: { postId: string }) {
 
   return (
     <section aria-labelledby="comments-heading" className="mt-12 border-t border-slate-200 pt-8">
-      <h2 id="comments-heading" className="text-xl font-bold text-navy-900">
+      <h2 id="comments-heading" className="text-xl font-bold text-belt-900">
         토론 {user && !loading && !error && <span className="text-base font-normal text-slate-500">({comments.length})</span>}
       </h2>
 
       {authLoading ? (
         <LoadingState message="로그인 정보를 확인하는 중입니다…" />
       ) : !user ? (
-        <div className="mt-4 rounded-lg bg-navy-50 px-4 py-6 text-center">
+        <div className="mt-4 rounded-lg bg-belt-50 px-4 py-6 text-center">
           <p className="text-slate-700">로그인 후 토론에 참여하세요</p>
           <Link to="/login" state={{ from: location.pathname }} className="btn-primary mt-3">
             로그인하기

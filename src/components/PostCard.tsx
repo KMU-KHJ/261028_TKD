@@ -6,12 +6,16 @@ import TagList from './TagList';
 
 export default function PostCard({ post }: { post: Post }) {
   return (
-    <article className="rounded-lg border border-slate-200 p-5 transition-shadow hover:shadow-md">
+    <article
+      className={`rounded-lg border border-l-4 border-slate-200 p-5 transition-shadow hover:shadow-md ${
+        post.category === 'research' ? 'border-l-chung-600' : 'border-l-hong-600'
+      }`}
+    >
       <div className="flex items-center gap-2 text-xs text-slate-500">
         <CategoryBadge category={post.category} />
         <time dateTime={post.createdAt.toISOString()}>{formatDate(post.createdAt)}</time>
       </div>
-      <h3 className="mt-2 text-lg font-semibold text-navy-900">
+      <h3 className="mt-2 text-lg font-semibold text-belt-900">
         <Link to={`/posts/${post.id}`} className="hover:underline">
           {post.title}
         </Link>

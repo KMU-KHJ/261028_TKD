@@ -1,6 +1,7 @@
 import { Outlet } from 'react-router-dom';
 import { SITE_NAME } from '../lib/config';
 import { isMockMode } from '../services';
+import BeltStripe from './BeltStripe';
 import Header from './Header';
 import MockBanner from './MockBanner';
 
@@ -15,11 +16,15 @@ export default function Layout() {
       </a>
       {isMockMode && <MockBanner />}
       <Header />
+      <BeltStripe />
       <main id="main" className="mx-auto w-full max-w-5xl flex-1 px-4 py-8">
         <Outlet />
       </main>
-      <footer className="border-t border-slate-200 py-6 text-center text-xs text-slate-500">
-        © {new Date().getFullYear()} {SITE_NAME}
+      <footer className="bg-belt-900 text-center text-xs text-belt-100">
+        <BeltStripe className="h-1" />
+        <p className="py-6">
+          © {new Date().getFullYear()} {SITE_NAME} · <span className="text-gold">태권도학과</span>
+        </p>
       </footer>
     </div>
   );
